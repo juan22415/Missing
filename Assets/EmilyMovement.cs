@@ -6,14 +6,15 @@ public class EmilyMovement : MonoBehaviour {
     private float horizontalmove, verticalmove;
     private Rigidbody emily_rigidbody;
     public bool facingright = true;
+    public TrailRenderer trail;
 
-    // Use this for initialization
     void Start () {
 
         emily_rigidbody = GetComponent<Rigidbody>();
+        trail = GetComponent<TrailRenderer>();
+        trail.enabled = false;
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 
         horizontalmove = Input.GetAxis("Horizontal");
@@ -25,6 +26,7 @@ public class EmilyMovement : MonoBehaviour {
         {
             
             emily_rigidbody.AddForce(new Vector3(horizontalmove, 0, verticalmove)*1000);
+            trail.enabled = true;
         } 
 
         if (horizontalmove > 0 && !facingright)
@@ -37,9 +39,9 @@ public class EmilyMovement : MonoBehaviour {
         }
     }
 
-
     void flip()
     {
+
         facingright = !facingright;
         Vector3 myscale = transform.localScale;
         myscale.x *= -1;

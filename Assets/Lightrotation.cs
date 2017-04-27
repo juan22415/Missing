@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Lightrotation : MonoBehaviour {
 
-    
-
+    [SerializeField]
+    private GameObject emily_hand;
     // Generate a plane that intersects the transform's position with an upwards normal.
     
     // Use this for initialization
@@ -21,6 +21,7 @@ public class Lightrotation : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        
         Plane playerPlane = new Plane(Vector3.up, transform.position);
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         float hitdist = 0.0f;
@@ -37,6 +38,8 @@ public class Lightrotation : MonoBehaviour {
             
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10 * Time.deltaTime);
             transform.eulerAngles = new Vector3(90, transform.eulerAngles.y, transform.eulerAngles.z);
+            transform.position = emily_hand.transform.position;
+           
         }    
     }
 
