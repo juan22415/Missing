@@ -22,7 +22,7 @@ public class CompleteCameraController : MonoBehaviour
         // Set the position of the camera's transform to be the same as the player's, but offset by the calculated offset distance.
         //transform.position = player.transform.position + offset;
         lateoffset = transform.position - player.transform.position;
-        Debug.Log(lateoffset);
+        //Debug.Log(lateoffset);
 
         if (lateoffset.x > 0.1 || lateoffset.x< -0.1)
         {

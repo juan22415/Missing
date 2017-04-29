@@ -5,7 +5,6 @@ using UnityEngine;
 public class EmilyMovement : MonoBehaviour {
     private float horizontalmove, verticalmove;
     private Rigidbody emily_rigidbody;
-    public bool facingright = true;
     public TrailRenderer trail;
 
     void Start () {
@@ -15,7 +14,8 @@ public class EmilyMovement : MonoBehaviour {
         trail.enabled = false;
 	}
 
-	void Update () {
+    void Update()
+    {
 
         horizontalmove = Input.GetAxis("Horizontal");
         verticalmove = Input.GetAxis("Vertical");
@@ -24,27 +24,9 @@ public class EmilyMovement : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            
-            emily_rigidbody.AddForce(new Vector3(horizontalmove, 0, verticalmove)*1000);
+
+            emily_rigidbody.AddForce(new Vector3(horizontalmove, 0, verticalmove) * 1000);
             trail.enabled = true;
-        } 
-
-        if (horizontalmove > 0 && !facingright)
-        {
-            flip();
         }
-        else if (horizontalmove < 0 && facingright)
-        {
-            flip();
-        }
-    }
-
-    void flip()
-    {
-
-        facingright = !facingright;
-        Vector3 myscale = transform.localScale;
-        myscale.x *= -1;
-        transform.localScale = myscale;
-    }
+    }      
 }
