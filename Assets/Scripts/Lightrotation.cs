@@ -5,21 +5,8 @@ using UnityEngine;
 public class Lightrotation : MonoBehaviour {
 
     [SerializeField]
-    private GameObject emily_hand;
-    // Generate a plane that intersects the transform's position with an upwards normal.
-    
-    // Use this for initialization
-    void Start () {
-        
-        // Generate a ray from the cursor position
-        //DebugDrawPlane(transform.position, Vector3.up);
-        // Determine the point where the cursor ray intersects the plane.
-        // This will be the point that the object must look towards to be looking at the mouse.
-        // Raycasting to a Plane object only gives us a distance, so we'll have to take th
+    private GameObject[] hands;
 
-    }
-
-    // Update is called once per frame
     void Update () {
         
         Plane playerPlane = new Plane(Vector3.up, transform.position);
@@ -36,10 +23,43 @@ public class Lightrotation : MonoBehaviour {
             Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
             // Smoothly rotate towards the target point.
             
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10 * Time.deltaTime);
-            transform.eulerAngles = new Vector3(90, transform.eulerAngles.y, transform.eulerAngles.z);
-            transform.position = emily_hand.transform.position;
-           
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 20 * Time.deltaTime);
+            transform.eulerAngles = new Vector3(90, Mathf.Round(transform.eulerAngles.y), Mathf.Round(transform.eulerAngles.z));
+
+            if (transform.localEulerAngles.y > 345 || transform.localEulerAngles.y < 15)
+            {
+                transform.position = hands[4].transform.position;
+
+            }
+
+            if (transform.localEulerAngles.y > 15 && transform.localEulerAngles.y < 60)
+            {
+                transform.position = hands[3].transform.position;
+
+            }
+            if (transform.localEulerAngles.y > 60 && transform.localEulerAngles.y < 165)
+            {
+                transform.position = hands[2].transform.position;
+
+            }
+            if (transform.localEulerAngles.y > 165 && transform.localEulerAngles.y < 195)
+            {
+                transform.position = hands[1].transform.position;
+
+            }
+            if (transform.localEulerAngles.y > 195 && transform.localEulerAngles.y < 300)
+            {
+                transform.position = hands[6].transform.position;
+
+            }
+            if (transform.localEulerAngles.y > 300 && transform.localEulerAngles.y < 345)
+            {
+                transform.position = hands[5].transform.position;
+
+            }
+
+
+
         }    
     }
 
