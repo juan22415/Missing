@@ -2,5 +2,6 @@ public enum BearState
 {
     Patrol,
     Alert,
-    Chase
+    Chase,
+    Attack
 }

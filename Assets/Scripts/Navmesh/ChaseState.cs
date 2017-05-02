@@ -8,35 +8,39 @@ public class ChaseState : BearStateBase
 
     public override void UpdateState()
     {
-        Chase ();
-		Look ();
+        Chase();
+        Look();
     }
 
 
     private void Look()
     {
-        Transform player = LookForPlayer ();
-		if (player != null)
-			controlled.chaseTarget = player;
-		else
-            ToAlert ();
+        Transform player = LookForPlayer();
+        if (player != null)
+            controlled.chaseTarget = player;
+        else
+            controlled.MakeTransition(BearState.Attack);
     }
 
-    private void Chase ()
+    private void Chase()
     {
-		controlled.navMeshAgent.SetDestination(controlled.chaseTarget.position);
-		if (IsCloseEnough ())
-			GameObject.Destroy (controlled.chaseTarget.gameObject);
+        controlled.navMeshAgent.SetDestination(controlled.chaseTarget.position);
+
+        if (IsCloseEnough())
+        {
+            controlled.MakeTransition(BearState.Attack);
+        }
+
     }
 
-	private bool IsCloseEnough ()
-	{
-		return (controlled.chaseTarget.position - controlled.transform.position).magnitude < 1;
-	}
+    private bool IsCloseEnough()
+    {
+        return (controlled.chaseTarget.position - controlled.transform.position).magnitude < 1;
+    }
 
-	private void ToAlert ()
-	{
-		controlled.chaseTarget = null;
-		controlled.MakeTransition (BearState.Alert);
-	}
+    private void ToAlert()
+    {
+        controlled.chaseTarget = null;
+        controlled.MakeTransition(BearState.Alert);
+    }
 }
