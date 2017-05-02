@@ -10,6 +10,8 @@ public class EmilyMovement : MonoBehaviour {
     private Rigidbody emily_rigidbody;
     private float dashtimer=3;
     private bool candash=true;
+    public float speed;
+    public float dashforce;
 
 
     public Dash dash;
@@ -37,12 +39,12 @@ public class EmilyMovement : MonoBehaviour {
         horizontalmove = Input.GetAxis("Horizontal");
         verticalmove = Input.GetAxis("Vertical");
 
-        emily_rigidbody.velocity = new Vector3(horizontalmove * 4, 0, verticalmove * 4);
+        emily_rigidbody.velocity = new Vector3(horizontalmove * speed, 0, verticalmove * speed);
 
         if (Input.GetMouseButtonDown(1) && candash)
         {
 
-            emily_rigidbody.AddForce(new Vector3(horizontalmove, 0, verticalmove)*30,ForceMode.VelocityChange);
+            emily_rigidbody.AddForce(emily_rigidbody.velocity.normalized* dashforce, ForceMode.VelocityChange);
             dash.Disabler();
             candash = false;
             dashtimer = 1f;

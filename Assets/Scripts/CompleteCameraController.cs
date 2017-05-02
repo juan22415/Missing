@@ -24,14 +24,14 @@ public class CompleteCameraController : MonoBehaviour
         lateoffset = transform.position - player.transform.position;
         //Debug.Log(lateoffset);
 
-        if (lateoffset.x > 0.1 || lateoffset.x< -0.1)
-        {
-            transform.position = Vector3.Lerp(transform.position, player.transform.position + offset, 10 * Time.deltaTime);
-        }
+        //if (lateoffset.x > 0.1 || lateoffset.x< -0.1)
+        //{
+           // transform.position = Vector3.Lerp(transform.position, player.transform.position + offset, 10 * Time.deltaTime);
+        //}
 
-        else
-        {
+        //else
+        //{
             transform.position = player.transform.position + offset;
-        }
+        //}
     }
 }
