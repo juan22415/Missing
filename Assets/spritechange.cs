@@ -10,28 +10,28 @@ public class spritechange : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (transform.localEulerAngles.y > 345 || transform.localEulerAngles.y < 15)
+        if (RotationManager.Instance.rot_direction==4)
         {
             GetComponent<SpriteRenderer>().sprite = spritearray[4];
         }
 
-        if (transform.localEulerAngles.y > 15 && transform.localEulerAngles.y < 60)
+        if (RotationManager.Instance.rot_direction == 3)
         {
             GetComponent<SpriteRenderer>().sprite = spritearray[3];
         }
-        if (transform.localEulerAngles.y > 60 && transform.localEulerAngles.y < 165)
+        if (RotationManager.Instance.rot_direction == 2)
         {
             GetComponent<SpriteRenderer>().sprite = spritearray[2];
         }
-        if (transform.localEulerAngles.y > 165 && transform.localEulerAngles.y < 195)
+        if (RotationManager.Instance.rot_direction == 1)
         {
             GetComponent<SpriteRenderer>().sprite = spritearray[1];
         }
-        if (transform.localEulerAngles.y > 195 && transform.localEulerAngles.y < 300)
+        if (RotationManager.Instance.rot_direction == 6)
         {
             GetComponent<SpriteRenderer>().sprite = spritearray[6];
         }
-        if (transform.localEulerAngles.y > 300 && transform.localEulerAngles.y < 345)
+        if (RotationManager.Instance.rot_direction == 5)
         {
             GetComponent<SpriteRenderer>().sprite = spritearray[5];
         }

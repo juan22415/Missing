@@ -26,33 +26,33 @@ public class Lightrotation : MonoBehaviour {
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 20 * Time.deltaTime);
             transform.eulerAngles = new Vector3(90, Mathf.Round(transform.eulerAngles.y), Mathf.Round(transform.eulerAngles.z));
 
-            if (transform.localEulerAngles.y > 345 || transform.localEulerAngles.y < 15)
+            if (RotationManager.Instance.rot_direction == 4)
             {
                 transform.position = hands[4].transform.position;
 
             }
 
-            if (transform.localEulerAngles.y > 15 && transform.localEulerAngles.y < 60)
+            if (RotationManager.Instance.rot_direction == 3)
             {
                 transform.position = hands[3].transform.position;
 
             }
-            if (transform.localEulerAngles.y > 60 && transform.localEulerAngles.y < 165)
+            if (RotationManager.Instance.rot_direction == 2)
             {
                 transform.position = hands[2].transform.position;
 
             }
-            if (transform.localEulerAngles.y > 165 && transform.localEulerAngles.y < 195)
+            if (RotationManager.Instance.rot_direction == 1)
             {
                 transform.position = hands[1].transform.position;
 
             }
-            if (transform.localEulerAngles.y > 195 && transform.localEulerAngles.y < 300)
+            if (RotationManager.Instance.rot_direction == 6)
             {
                 transform.position = hands[6].transform.position;
 
             }
-            if (transform.localEulerAngles.y > 300 && transform.localEulerAngles.y < 345)
+            if (RotationManager.Instance.rot_direction == 5)
             {
                 transform.position = hands[5].transform.position;
 

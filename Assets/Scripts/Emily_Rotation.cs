@@ -26,32 +26,32 @@ public class Emily_Rotation : MonoBehaviour {
 
         //Debug.Log(flashlight.transform.localEulerAngles.y);
 
-        if (flashlight.transform.localEulerAngles.y > 345 || flashlight.transform.localEulerAngles.y < 15)
+        if (RotationManager.Instance.rot_direction == 4)
         {
             anim.SetInteger("direction", 4);
         }
 
-        else if (flashlight.transform.localEulerAngles.y > 15 && flashlight.transform.localEulerAngles.y < 60)
+        else if (RotationManager.Instance.rot_direction == 3)
         {
             anim.SetInteger("direction", 3);
         }
 
-        else if (flashlight.transform.localEulerAngles.y > 60 && flashlight.transform.localEulerAngles.y < 165)
+        else if (RotationManager.Instance.rot_direction == 2)
         {
             anim.SetInteger("direction", 2);
         }
 
-        else if (flashlight.transform.localEulerAngles.y > 165 && flashlight.transform.localEulerAngles.y < 195)
+        else if (RotationManager.Instance.rot_direction == 1)
         {
             anim.SetInteger("direction", 1);
         }
 
-        else if (flashlight.transform.localEulerAngles.y > 195 && flashlight.transform.localEulerAngles.y < 300)
+        else if (RotationManager.Instance.rot_direction == 6)
         {
             anim.SetInteger("direction", 6);
         }
 
-        else if (flashlight.transform.localEulerAngles.y > 300 && flashlight.transform.localEulerAngles.y < 345)
+        else if (RotationManager.Instance.rot_direction == 5)
         {
             anim.SetInteger("direction", 5);
         }
