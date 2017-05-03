@@ -14,6 +14,7 @@ public class BearAIController : MonoBehaviour
     [HideInInspector]
     public Transform chaseTarget;
 
+    public EnemyAttack enemyattack;
     [SerializeField]
     private float force;
     public Transform shotSpawn;
@@ -28,6 +29,7 @@ public class BearAIController : MonoBehaviour
 
     private void Awake()
     {
+        enemyattack = GetComponent<EnemyAttack>();
         states = new Dictionary<BearState, BearStateBase>();
         states.Add(BearState.Patrol, new PatrolState(this));
         states.Add(BearState.Alert, new AlertState(this));
@@ -62,9 +64,7 @@ public class BearAIController : MonoBehaviour
     {
         if (isOn == true)
         {
-            Rigidbody shot = Instantiate(bullet, shotSpawn.position, shotSpawn.rotation);
-
-            shot.velocity = transform.forward * force;
+            enemyattack.enabled = true;
             isOn = false;
         }
 

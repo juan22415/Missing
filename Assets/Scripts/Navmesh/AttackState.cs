@@ -13,8 +13,8 @@ public class AttackState : BearStateBase
 
     public override void UpdateState()
     {
-        AttackEmily();
-       
+        Search();
+
     }
     public override void OnTriggerEnter(Collider other)
     {
@@ -23,13 +23,13 @@ public class AttackState : BearStateBase
             AttackEmily();
             Search();
         }
-           
+
     }
     private void AttackEmily()
     {
         controlled.Disparar();
 
-        
+
     }
     private void Search()
     {
