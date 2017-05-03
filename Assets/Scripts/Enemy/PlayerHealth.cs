@@ -43,6 +43,7 @@ public class PlayerHealth : MonoBehaviour
         {
             // ... set the colour of the damageImage to the flash colour.
             damageImage.color = flashColour;
+            
         }
         // Otherwise...
         else
@@ -76,6 +77,7 @@ public class PlayerHealth : MonoBehaviour
         {
             // ... it should die.
             Death();
+            RestartLevel();
         }
     }
 

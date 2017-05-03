@@ -35,7 +35,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (isSinking)
         {
-            transform.Translate(-Vector3.up * sinkSpeed * Time.deltaTime);
+          transform.Translate(-Vector3.up * sinkSpeed * Time.deltaTime);
         }
     }
 
@@ -69,6 +69,7 @@ public class EnemyHealth : MonoBehaviour
 
         enemyAudio.clip = deathClip;
         enemyAudio.Play();
+  
     }
 
 
