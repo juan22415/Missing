@@ -14,24 +14,38 @@ public class AttackState : BearStateBase
     public override void UpdateState()
     {
         AttackEmily();
-
+       
     }
     public override void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
+        {
             AttackEmily();
+            Search();
+        }
+           
     }
     private void AttackEmily()
     {
         controlled.Disparar();
 
-
-        controlled.MakeTransition(BearState.Chase);
+        
     }
+    private void Search()
+    {
+        Transform player = LookForPlayer();
+        if (player != null)
+            ToChase(player);
+    }
+
     private void ToPatrol()
     {
         controlled.MakeTransition(BearState.Patrol);
     }
-
+    private void ToChase(Transform player)
+    {
+        controlled.chaseTarget = player;
+        controlled.MakeTransition(BearState.Chase);
+    }
 }
 
