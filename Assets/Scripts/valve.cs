@@ -26,6 +26,7 @@ public class valve : MonoBehaviour {
         fireparticles = fire.GetComponent<ParticleSystem>();
         fireparticles.Stop();
         Lightdecreaser();
+        fire.GetComponent<BoxCollider>().enabled = false;
         //flame_light.intensity= Mathf.Lerp(15.4f, 0, Time.time);
     }
 

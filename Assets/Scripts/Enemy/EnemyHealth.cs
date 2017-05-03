@@ -37,6 +37,11 @@ public class EnemyHealth : MonoBehaviour
         {
           transform.Translate(-Vector3.up * sinkSpeed * Time.deltaTime);
         }
+
+        if (currentHealth<0)
+        {
+            Destroy(gameObject);
+        }
     }
 
 
