@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     public int startingHealth = 100;
-    public int currentHealth;
+    public float currentHealth;
     public float sinkSpeed = 2.5f;
     public int scoreValue = 10;
     public AudioClip deathClip;
@@ -40,7 +40,7 @@ public class EnemyHealth : MonoBehaviour
     }
 
 
-    public void TakeDamage(int amount, Vector3 hitPoint)
+    public void TakeDamage(float amount, Vector3 hitPoint)
     {
         if (isDead)
             return;
@@ -49,8 +49,8 @@ public class EnemyHealth : MonoBehaviour
 
         currentHealth -= amount;
 
-        hitParticles.transform.position = hitPoint;
-        hitParticles.Play();
+        //hitParticles.transform.position = hitPoint;
+        //.Play();
 
         if (currentHealth <= 0)
         {
@@ -63,7 +63,7 @@ public class EnemyHealth : MonoBehaviour
     {
         isDead = true;
 
-        capsuleCollider.isTrigger = true;
+        //capsuleCollider.isTrigger = true;
 
         anim.SetTrigger("Dead");
 
@@ -79,6 +79,15 @@ public class EnemyHealth : MonoBehaviour
         isSinking = true;
         //ScoreManager.score += scoreValue;
         Destroy(gameObject, 2f);
+    }
+
+
+    public void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag=="linterna")
+        {
+            TakeDamage(0.2f, Vector3.forward);
+        }
     }
 }
 
