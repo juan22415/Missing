@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
+
+    private EmilyMovement emilymovement;
+    private Emily_Rotation emilyRotation;
+    public GameObject linterna;
     public int startingHealth = 100;                            // The amount of health the player starts the game with.
     public int currentHealth;                                   // The current health the player has.
                              // Reference to the UI's health bar.
@@ -29,8 +33,8 @@ public class PlayerHealth : MonoBehaviour
         // Setting up the references.
         anim = GetComponent<Animator>();
         playerAudio = GetComponent<AudioSource>();
-    
-
+        emilymovement = GetComponent<EmilyMovement>();
+        emilyRotation = GetComponent<Emily_Rotation>();
         // Set the initial health of the player.
         currentHealth = startingHealth;
     }
@@ -98,7 +102,10 @@ public class PlayerHealth : MonoBehaviour
         playerAudio.Play();
 
         // Turn off the movement and shooting scripts.
-     
+        emilymovement.enabled = false;
+        emilyRotation.enabled = false;
+        Destroy(gameObject, 2f);
+        Destroy(linterna,1f);
     }
 
 
