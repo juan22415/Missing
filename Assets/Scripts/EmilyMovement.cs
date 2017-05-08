@@ -9,8 +9,9 @@ public class EmilyMovement : MonoBehaviour {
     private float horizontalmove, verticalmove;
     private Rigidbody emily_rigidbody;
     private float dashCooldown=3;
-    private float dashduration=1f;
+    private float dashduration= 2;
     private bool candash=true;
+    private Vector3 dashdirection;
 
     public float speed;
     public float dashforce;
@@ -37,7 +38,7 @@ public class EmilyMovement : MonoBehaviour {
             dash.Enabler();
         }
 
-        if (dashduration < 1)
+        if (dashduration < 2)
         {
             Dash();
         }
@@ -50,18 +51,19 @@ public class EmilyMovement : MonoBehaviour {
         if (Input.GetMouseButtonDown(1) && candash)
         {
             Dash();
+            dashdirection= emily_rigidbody.velocity.normalized;
         }
     } 
     public void Dash()
     {
-        emily_rigidbody.AddForce(emily_rigidbody.velocity.normalized * dashforce);
+        emily_rigidbody.AddForce(dashdirection * dashforce);
 
         dash.Disabler();
         candash = false;
         dashCooldown = 1f;
         dashduration -= Time.deltaTime;
 
-        if (dashduration < 0) dashduration = 1;
+        if (dashduration < 0) dashduration = 2;
     }
     
          

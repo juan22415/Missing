@@ -16,6 +16,6 @@ public class Flame_damage : MonoBehaviour {
 
     private void OnTriggerStay(Collider other)
     {
-        playerHealth.TakeDamage(2);
+        playerHealth.TakeDamage(10);
     }
 }
