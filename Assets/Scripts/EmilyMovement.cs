@@ -8,14 +8,15 @@ public class EmilyMovement : MonoBehaviour {
     private GameObject[] dasheffect;
     private float horizontalmove, verticalmove;
     private Rigidbody emily_rigidbody;
-    private float dashtimer=3;
+    private float dashCooldown=3;
+    private float dashduration=1f;
     private bool candash=true;
+
     public float speed;
     public float dashforce;
 
 
     public Dash dash;
-    
 
 
     void Start () {
@@ -27,13 +28,18 @@ public class EmilyMovement : MonoBehaviour {
     {
         if (!candash)
         {
-            dashtimer -= Time.deltaTime;
+            dashCooldown -= Time.deltaTime;
         }
 
-        if (dashtimer<0)
+        if (dashCooldown<0)
         {
             candash = true;
             dash.Enabler();
+        }
+
+        if (dashduration < 1)
+        {
+            Dash();
         }
 
         horizontalmove = Input.GetAxis("Horizontal");
@@ -43,11 +49,20 @@ public class EmilyMovement : MonoBehaviour {
 
         if (Input.GetMouseButtonDown(1) && candash)
         {
-
-            emily_rigidbody.AddForce(emily_rigidbody.velocity.normalized* dashforce);
-            dash.Disabler();
-            candash = false;
-            dashtimer = 1f;
+            Dash();
         }
-    }      
+    } 
+    public void Dash()
+    {
+        emily_rigidbody.AddForce(emily_rigidbody.velocity.normalized * dashforce);
+
+        dash.Disabler();
+        candash = false;
+        dashCooldown = 1f;
+        dashduration -= Time.deltaTime;
+
+        if (dashduration < 0) dashduration = 1;
+    }
+    
+         
 }
