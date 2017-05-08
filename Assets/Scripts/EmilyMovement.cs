@@ -44,7 +44,7 @@ public class EmilyMovement : MonoBehaviour {
         if (Input.GetMouseButtonDown(1) && candash)
         {
 
-            emily_rigidbody.AddForce(emily_rigidbody.velocity.normalized* dashforce, ForceMode.VelocityChange);
+            emily_rigidbody.AddForce(emily_rigidbody.velocity.normalized* dashforce);
             dash.Disabler();
             candash = false;
             dashtimer = 1f;

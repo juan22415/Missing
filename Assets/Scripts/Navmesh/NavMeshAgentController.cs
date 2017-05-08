@@ -22,6 +22,7 @@ public class NavMeshAgentController : MonoBehaviour
 		// Get references to components, shouldn't be null because of RequireComponent attribute
 		agent = GetComponent<NavMeshAgent> ();
 		animator = GetComponent<Animator> ();
+        agent.updateRotation = false;
 	}
 	
 	private void Update () 

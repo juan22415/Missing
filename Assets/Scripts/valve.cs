@@ -10,15 +10,6 @@ public class valve : MonoBehaviour {
     [SerializeField]
     private Light flame_light;
     private float decreasetime = 2;
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        
-	}
 
 
     private void OnTriggerEnter(Collider other)
@@ -27,7 +18,6 @@ public class valve : MonoBehaviour {
         fireparticles.Stop();
         Lightdecreaser();
         fire.GetComponent<BoxCollider>().enabled = false;
-        //flame_light.intensity= Mathf.Lerp(15.4f, 0, Time.time);
     }
 
     private void Lightdecreaser()
