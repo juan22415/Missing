@@ -14,12 +14,12 @@ public class RotationManager : GenericSingletonClass<RotationManager>
 
         }
 
-        if (transform.localEulerAngles.y > 20 && transform.localEulerAngles.y < 60)
+        if (transform.localEulerAngles.y > 25 && transform.localEulerAngles.y < 60)
         {
             rot_direction = 3;
 
         }
-        if (transform.localEulerAngles.y > 65 && transform.localEulerAngles.y < 165)
+        if (transform.localEulerAngles.y > 70 && transform.localEulerAngles.y < 160)
         {
             rot_direction = 2;
 
@@ -29,12 +29,12 @@ public class RotationManager : GenericSingletonClass<RotationManager>
             rot_direction = 1;
 
         }
-        if (transform.localEulerAngles.y > 200 && transform.localEulerAngles.y < 295)
+        if (transform.localEulerAngles.y > 205 && transform.localEulerAngles.y < 290)
         {
             rot_direction = 6;
 
         }
-        if (transform.localEulerAngles.y > 300 && transform.localEulerAngles.y < 340)
+        if (transform.localEulerAngles.y > 300 && transform.localEulerAngles.y < 335)
         {
             rot_direction = 5;
 
