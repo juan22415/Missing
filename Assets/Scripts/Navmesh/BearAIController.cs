@@ -55,6 +55,7 @@ public class BearAIController : MonoBehaviour
         if (other.tag == "Player")
         {
             isOn = true;
+            Debug.Log("el jugador esta cerca");
         }
         currentState.OnTriggerEnter(other);
 

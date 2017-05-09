@@ -34,6 +34,7 @@ public class NavMeshAgentController : MonoBehaviour
 	{
 		// Set the agents new destination
 		agent.destination = destination;
+        
 		agent.Resume ();
 	}
 
@@ -46,6 +47,6 @@ public class NavMeshAgentController : MonoBehaviour
 	{
 		// Set speed parameter in animator
 		float speed = IsMoving? 1f : 0f;
-		animator.SetFloat ("Speed", speed);
+		//animator.SetFloat ("Speed", speed);
 	}
 }
