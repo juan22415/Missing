@@ -6,19 +6,39 @@ public class Lightrotation : MonoBehaviour {
 
     [SerializeField]
     private GameObject[] hands;
+    private float horzontalaxis;
+    private float verticalaxis;
+    Vector3 targetPoint;
+
+    private void Start()
+    {
+        horzontalaxis = Input.GetAxis("Mouse X");
+        verticalaxis = Input.GetAxis("Mouse Y");
+    }
 
     void Update () {
-        
+
+
+        horzontalaxis = Input.GetAxis("Mouse X");
+        verticalaxis = Input.GetAxis("Mouse Y");
+
         Plane playerPlane = new Plane(Vector3.up, transform.position);
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        
         float hitdist = 0.0f;
         // If the ray is parallel to the plane, Raycast will return false.
         if (playerPlane.Raycast(ray, out hitdist))
         {
             // Get the point along the ray that hits the calculated distance.
-            Vector3 targetPoint = ray.GetPoint(hitdist);
+            
+
+            targetPoint = new Vector3(horzontalaxis, 0, verticalaxis) + transform.position;
+          
+         
+
             //Debug.Log(targetPoint);
             Debug.DrawLine(transform.position, targetPoint, Color.blue);
+            
             // Determine the target rotation.  This is the rotation if the transform looks at the target point.
             Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
             // Smoothly rotate towards the target point.
