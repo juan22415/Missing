@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class valve : MonoBehaviour {
+public class valve : MonoBehaviour
+{
 
     [SerializeField]
     private GameObject fire;
@@ -14,17 +15,21 @@ public class valve : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        fireparticles = fire.GetComponent<ParticleSystem>();
-        fireparticles.Stop();
-        Lightdecreaser();
-        fire.GetComponent<BoxCollider>().enabled = false;
+        if (other.gameObject.CompareTag("Player"))
+        {
+            fireparticles = fire.GetComponent<ParticleSystem>();
+            fireparticles.Stop();
+            Lightdecreaser();
+            fire.GetComponent<BoxCollider>().enabled = false;
+        }
+
     }
 
     private void Lightdecreaser()
     {
         while (flame_light.intensity > 0)
         {
-            flame_light.intensity = Mathf.Lerp(15.4f, 0,decreasetime/ Time.deltaTime);
+            flame_light.intensity = Mathf.Lerp(15.4f, 0, decreasetime / Time.deltaTime);
         }
     }
 }

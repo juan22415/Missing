@@ -31,16 +31,27 @@ public class Lightrotation : MonoBehaviour {
         {
             // Get the point along the ray that hits the calculated distance.
             
+            if (Mathf.Abs(horzontalaxis)>0.05)
+            {
+                targetPoint = new Vector3(horzontalaxis, 0, targetPoint.z);
+            }
+            else { horzontalaxis=targetPoint.x; }
 
-            targetPoint = new Vector3(horzontalaxis, 0, verticalaxis) + transform.position;
-          
-         
+            if (Mathf.Abs(verticalaxis) > 0.05)
+            {
+                targetPoint = new Vector3(targetPoint.x, 0, verticalaxis);
+            }
+            else { verticalaxis = targetPoint.z; }
+
+
+
+
 
             //Debug.Log(targetPoint);
             Debug.DrawLine(transform.position, targetPoint, Color.blue);
             
             // Determine the target rotation.  This is the rotation if the transform looks at the target point.
-            Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
+            Quaternion targetRotation = Quaternion.LookRotation(targetPoint);
             // Smoothly rotate towards the target point.
             
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 20 * Time.deltaTime);
