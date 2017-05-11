@@ -54,8 +54,8 @@ public class EnemyHealth : MonoBehaviour
 
         currentHealth -= amount;
 
-       // hitParticles.transform.position = hitPoint;
-       // hitParticles.Play();
+        //hitParticles.transform.position = hitPoint;
+        hitParticles.Play();
 
         if (currentHealth <= 0)
         {
@@ -92,7 +92,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (other.gameObject.tag=="linterna")
         {
-            TakeDamage(0.2f, Vector3.forward);
+            TakeDamage(0.2f, Vector3.zero);
         }
     }
 }
