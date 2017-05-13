@@ -10,6 +10,7 @@ public class EnableObject : MonoBehaviour {
 
     public void OnTriggerEnter(Collider other)
     {
-        toenable.SetActive(true);
+        if (other.gameObject.CompareTag("Player")) toenable.SetActive(true);
+
     }
 }

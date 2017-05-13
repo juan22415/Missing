@@ -16,6 +16,7 @@ public class Flame_damage : MonoBehaviour {
 
     private void OnTriggerStay(Collider other)
     {
+        if (other.gameObject.CompareTag("Player"))
         playerHealth.TakeDamage(10);
     }
 }
