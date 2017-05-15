@@ -21,6 +21,7 @@ public class valve : MonoBehaviour
             fireparticles.Stop();
             Lightdecreaser();
             fire.GetComponent<BoxCollider>().enabled = false;
+            fire.GetComponent<AudioSource>().enabled = false;
         }
 
     }

@@ -10,6 +10,7 @@ public class EnemyHealth : MonoBehaviour
     public float sinkSpeed = 2.5f;
     public int scoreValue = 10;
     public AudioClip deathClip;
+    public AudioClip takingdamage;
 
 
     Animator anim;
@@ -83,12 +84,33 @@ public class EnemyHealth : MonoBehaviour
         Destroy(gameObject, 2f);
     }
 
+    public void playdamagesound ()
+    {
+        if (!enemyAudio.isPlaying)
+        {
+            enemyAudio.volume = 1;
+            enemyAudio.PlayOneShot(takingdamage,1);
+        }
+        
+    }
+
 
     public void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag=="linterna")
         {
+            playdamagesound();
             TakeDamage(0.2f, Vector3.zero);
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "linterna")
+        {
+            if (!isDead)
+            enemyAudio.Stop();
+            
         }
     }
 }
