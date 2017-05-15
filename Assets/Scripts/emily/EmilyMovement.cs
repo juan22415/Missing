@@ -17,13 +17,14 @@ public class EmilyMovement : MonoBehaviour
     private AudioSource m_audiosource;
 
     private float volumen;
-    private float volLowRange = .10f;
-    private float volHighRange = .30f;
+    private float volLowRange = 0.01f;
+    private float volHighRange = 0.03f;
 
 
     public float speed;
     public float dashforce;
     public AudioClip footsteps;
+    public AudioClip dashsound;
 
     public Dash dash;
 
@@ -63,6 +64,10 @@ public class EmilyMovement : MonoBehaviour
             Debug.Log("LB");
             Dash();
             dashdirection = emily_rigidbody.velocity.normalized;
+            m_audiosource.clip = dashsound;
+            m_audiosource.volume = .5f;
+            m_audiosource.Play();
+
         }
 
     }
@@ -81,7 +86,7 @@ public class EmilyMovement : MonoBehaviour
 
         }
 
-        if (Mathf.Abs( emily_rigidbody.velocity.x) < 0.2 && Mathf.Abs(emily_rigidbody.velocity.z) < 0.2)
+        if (Mathf.Abs(horizontalmove) < 0.2 && Mathf.Abs(verticalmove) < 0.2)
         {
             m_audiosource.Stop();
         }

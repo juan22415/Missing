@@ -88,7 +88,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (!enemyAudio.isPlaying)
         {
-            enemyAudio.volume = 1;
+            enemyAudio.volume = 0.2f;
             enemyAudio.PlayOneShot(takingdamage,1);
         }
         

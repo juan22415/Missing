@@ -9,6 +9,13 @@ namespace CompleteProject
         PlayerHealth playerHealth;      // Reference to the player's health.
         EnemyHealth enemyHealth;        // Reference to this enemy's health.
         UnityEngine.AI.NavMeshAgent nav;               // Reference to the nav mesh agent.
+        Vector3 targetdirection;
+        Animator animator;
+        Vector3 myscale;
+
+
+        public int scalesize;
+
 
 
         void Awake ()
@@ -18,9 +25,36 @@ namespace CompleteProject
             playerHealth = player.GetComponent <PlayerHealth> ();
             enemyHealth = GetComponent <EnemyHealth> ();
             nav = GetComponent <UnityEngine.AI.NavMeshAgent> ();
+            animator = GetComponent<Animator>();
+            Vector3 myscale = (new Vector3(1, 1, 1));
         }
 
+        private void FixedUpdate()
+        {
+            targetdirection = player.position - transform.position;
 
+            if (targetdirection.x > 0)
+            {
+                animator.SetBool("movingright", true);
+                Vector3 myscale = (new Vector3(scalesize, scalesize, 1));
+                transform.localScale = myscale;
+            }
+            else
+            { 
+                animator.SetBool("movingright", false);
+                Vector3 myscale = (new Vector3(-scalesize, scalesize, 1));
+                transform.localScale = myscale;
+
+            }
+
+            if (targetdirection.z > 0)
+            {
+                animator.SetBool("movingfront", false); 
+            }
+
+            else animator.SetBool("movingfront",true );
+
+        }
         void Update ()
         {
             nav.updateRotation = false;
