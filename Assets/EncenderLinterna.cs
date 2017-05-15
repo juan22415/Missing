@@ -17,7 +17,7 @@ public class EncenderLinterna : MonoBehaviour {
 	}
 
 	void Update () {
-        Debug.Log(overheat);
+
 
         if (isenabled == true)
         {

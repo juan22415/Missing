@@ -15,7 +15,7 @@ public class EnemyHealth : MonoBehaviour
     Animator anim;
     AudioSource enemyAudio;
    public ParticleSystem hitParticles;
-    CapsuleCollider capsuleCollider;
+    BoxCollider boxcollider;
     bool isDead;
     bool isSinking;
 
@@ -25,7 +25,7 @@ public class EnemyHealth : MonoBehaviour
         anim = GetComponent<Animator>();
         enemyAudio = GetComponent<AudioSource>();
        
-        capsuleCollider = GetComponent<CapsuleCollider>();
+        boxcollider = GetComponent<BoxCollider>();
 
         currentHealth = startingHealth;
     }
@@ -36,11 +36,6 @@ public class EnemyHealth : MonoBehaviour
         if (isSinking)
         {
           transform.Translate(-Vector3.up * sinkSpeed * Time.deltaTime);
-        }
-
-        if (currentHealth<0)
-        {
-            Destroy(gameObject);
         }
     }
 
@@ -68,13 +63,14 @@ public class EnemyHealth : MonoBehaviour
     {
         isDead = true;
 
-        //capsuleCollider.isTrigger = true;
+        boxcollider.isTrigger = true;
 
-      //  anim.SetTrigger("Dead");
-
+        //  anim.SetTrigger("Dead");
+       
         enemyAudio.clip = deathClip;
         enemyAudio.Play();
-  
+        StartSinking();
+
     }
 
 
