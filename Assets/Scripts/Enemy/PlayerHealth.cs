@@ -108,6 +108,16 @@ public class PlayerHealth : MonoBehaviour
         Destroy(linterna,1f);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("medkit"))
+        {
+            currentHealth = startingHealth;
+            healthSlider.value = currentHealth;
+
+            Destroy(other.gameObject);
+        }
+    }
 
     public void RestartLevel()
     {

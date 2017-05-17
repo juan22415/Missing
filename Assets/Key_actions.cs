@@ -13,8 +13,9 @@ public class Key_actions : MonoBehaviour {
     {
         if(other.CompareTag("llave"))
         {
+            Destroy(other.gameObject);
             opener.SetActive(true);
-            Destroy(other);
+            
         }
     }
 }

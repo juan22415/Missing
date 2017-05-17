@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
-public class EnemyHealth : MonoBehaviour
+public class BossHealth : MonoBehaviour
 {
     public int startingHealth = 100;
     public float currentHealth;
@@ -11,24 +12,33 @@ public class EnemyHealth : MonoBehaviour
     public int scoreValue = 10;
     public AudioClip deathClip;
     public AudioClip takingdamage;
+    public AudioClip laugh;
 
 
     Animator anim;
     AudioSource enemyAudio;
-   public ParticleSystem hitParticles;
+    //public ParticleSystem hitParticles;
     BoxCollider boxcollider;
     bool isDead;
     bool isSinking;
+    bool cantakedamage;
+    int phasechangehealth=400;
+
+    public bool[] valve;
+
+
 
 
     void Awake()
     {
         anim = GetComponent<Animator>();
         enemyAudio = GetComponent<AudioSource>();
-       
+
         boxcollider = GetComponent<BoxCollider>();
 
         currentHealth = startingHealth;
+        valve[0] = false;
+        valve[1] = false;
     }
 
 
@@ -36,7 +46,18 @@ public class EnemyHealth : MonoBehaviour
     {
         if (isSinking)
         {
-          transform.Translate(-Vector3.up * sinkSpeed * Time.deltaTime);
+            transform.Translate(-Vector3.up * sinkSpeed * Time.deltaTime);
+        }
+
+
+        if (valve[0]==true && valve[1]==true)
+        {
+            cantakedamage = true;
+        }
+
+        if (cantakedamage)
+        {
+            anim.SetBool("cantakedamage", true);
         }
     }
 
@@ -50,8 +71,19 @@ public class EnemyHealth : MonoBehaviour
 
         currentHealth -= amount;
 
+
+        if (currentHealth< phasechangehealth)
+        {
+            valve[0] = false;
+            valve[1] = false;
+            anim.SetBool("cantakedamage", false);
+            cantakedamage = false;
+            phasechangehealth -= 200;
+
+        }
+
         //hitParticles.transform.position = hitPoint;
-        hitParticles.Play();
+        //hitParticles.Play();
 
         if (currentHealth <= 0)
         {
@@ -67,7 +99,7 @@ public class EnemyHealth : MonoBehaviour
         boxcollider.isTrigger = true;
 
         //  anim.SetTrigger("Dead");
-       
+
         enemyAudio.clip = deathClip;
         enemyAudio.Play();
         StartSinking();
@@ -77,30 +109,49 @@ public class EnemyHealth : MonoBehaviour
 
     public void StartSinking()
     {
-        GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
+        //GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
         GetComponent<Rigidbody>().isKinematic = true;
         isSinking = true;
         //ScoreManager.score += scoreValue;
         Destroy(gameObject, 2f);
     }
 
-    public void playdamagesound ()
+    public void playdamagesound()
     {
         if (!enemyAudio.isPlaying)
         {
-            enemyAudio.volume = 1;
-            enemyAudio.PlayOneShot(takingdamage,1);
+            //enemyAudio.volume = 0.2f;
+            enemyAudio.PlayOneShot(takingdamage, 1);
         }
-        
+
     }
 
 
     public void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag=="linterna")
+        if (other.gameObject.tag == "linterna")
         {
-            playdamagesound();
-            TakeDamage(0.2f, Vector3.zero);
+
+            if (cantakedamage)
+            {
+                playdamagesound();
+                TakeDamage(0.2f, Vector3.zero);
+            }
+
+            else
+            {
+                playlaughsound();
+            }
+
+        }
+    }
+
+    private void playlaughsound()
+    {
+        if (!enemyAudio.isPlaying)
+        {
+           
+            enemyAudio.PlayOneShot(laugh, 1);
         }
     }
 
@@ -109,8 +160,8 @@ public class EnemyHealth : MonoBehaviour
         if (other.gameObject.tag == "linterna")
         {
             if (!isDead)
-            enemyAudio.Stop();
-            
+                enemyAudio.Stop();
+
         }
     }
 }

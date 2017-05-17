@@ -17,8 +17,8 @@ public class EmilyMovement : MonoBehaviour
     private AudioSource m_audiosource;
 
     private float volumen;
-    private float volLowRange = 0.01f;
-    private float volHighRange = 0.03f;
+    private float volLowRange = 0.1f;
+    private float volHighRange = 0.3f;
 
 
     public float speed;
@@ -61,7 +61,7 @@ public class EmilyMovement : MonoBehaviour
 
         if (Input.GetButtonDown("LB") && candash)
         {
-            Debug.Log("LB");
+
             Dash();
             dashdirection = emily_rigidbody.velocity.normalized;
             m_audiosource.clip = dashsound;

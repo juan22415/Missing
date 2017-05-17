@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_enbler : MonoBehaviour
-{
+public class Bossvalve : MonoBehaviour {
 
-    public GameObject[] enemys;
-    public AudioSource source;
+    public BossHealth bosshealth;
+    public int valveindex;
     public AudioClip clip;
+    public AudioSource source;
 
 
     private void Start()
@@ -15,27 +15,17 @@ public class Enemy_enbler : MonoBehaviour
         source = GetComponent<AudioSource>();
     }
 
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
+            bosshealth.valve[valveindex] = true;
             source.clip = clip;
+            source.volume = 0.5f;
             source.Play();
-            enabler();
-        }
-    }
 
-
-    public void enabler()
-    {
-
-        
-
-        for (int i = 0; i < enemys.Length; i++)
-        {
             
-            enemys[i].SetActive(true);
         }
     }
-
 }
