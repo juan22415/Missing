@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class BossHealth : MonoBehaviour
 {
@@ -13,8 +13,12 @@ public class BossHealth : MonoBehaviour
     public AudioClip deathClip;
     public AudioClip takingdamage;
     public AudioClip laugh;
+    public float flashSpeed = 5f;
+    public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
+    public Slider healthSlider;
+    public Image damageImage;
 
-
+    bool damaged;
     Animator anim;
     AudioSource enemyAudio;
     //public ParticleSystem hitParticles;
@@ -22,7 +26,7 @@ public class BossHealth : MonoBehaviour
     bool isDead;
     bool isSinking;
     bool cantakedamage;
-    int phasechangehealth=400;
+    int phasechangehealth = 400;
 
     public bool[] valve;
 
@@ -44,13 +48,33 @@ public class BossHealth : MonoBehaviour
 
     void Update()
     {
+
+        // If the player has just been damaged...
+        if (damaged)
+        {
+            // ... set the colour of the damageImage to the flash colour.
+            damageImage.color = flashColour;
+
+        }
+        // Otherwise...
+        else
+        {
+            // ... transition the colour back to clear.
+            damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
+        }
+
+        // Reset the damaged flag.
+        damaged = false;
+
+
+
         if (isSinking)
         {
             transform.Translate(-Vector3.up * sinkSpeed * Time.deltaTime);
         }
 
 
-        if (valve[0]==true && valve[1]==true)
+        if (valve[0] == true && valve[1] == true)
         {
             cantakedamage = true;
         }
@@ -64,6 +88,9 @@ public class BossHealth : MonoBehaviour
 
     public void TakeDamage(float amount, Vector3 hitPoint)
     {
+
+        
+
         if (isDead)
             return;
 
@@ -71,8 +98,9 @@ public class BossHealth : MonoBehaviour
 
         currentHealth -= amount;
 
+        healthSlider.value = currentHealth;
 
-        if (currentHealth< phasechangehealth)
+        if (currentHealth < phasechangehealth)
         {
             valve[0] = false;
             valve[1] = false;
@@ -134,12 +162,14 @@ public class BossHealth : MonoBehaviour
 
             if (cantakedamage)
             {
+
                 playdamagesound();
                 TakeDamage(0.2f, Vector3.zero);
             }
 
             else
             {
+                damaged = true;
                 playlaughsound();
             }
 
@@ -150,7 +180,7 @@ public class BossHealth : MonoBehaviour
     {
         if (!enemyAudio.isPlaying)
         {
-           
+
             enemyAudio.PlayOneShot(laugh, 1);
         }
     }

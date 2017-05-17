@@ -11,12 +11,21 @@ public class valve : MonoBehaviour
     [SerializeField]
     private Light flame_light;
     private float decreasetime = 2;
+    public AudioSource source;
+
+
+    private void Awake()
+    {
+        source = GetComponent<AudioSource>();
+    }
+
 
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            source.Play();
             fireparticles = fire.GetComponent<ParticleSystem>();
             fireparticles.Stop();
             Lightdecreaser();
