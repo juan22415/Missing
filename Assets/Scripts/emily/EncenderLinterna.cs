@@ -1,16 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EncenderLinterna : MonoBehaviour {
 
     [SerializeField]
     private Light flashlight;
     private BoxCollider collider;
-
     private bool isenabled;
-
     private float overheat;
+
+    public Slider heat;
+
 
 	void Start () {
         collider = GetComponent<BoxCollider>();
@@ -22,6 +24,7 @@ public class EncenderLinterna : MonoBehaviour {
         if (isenabled == true)
         {
             overheat+=0.2f;
+            heat.value = overheat;
             if (overheat > 100)
             {
                 Changer(false);
@@ -30,6 +33,7 @@ public class EncenderLinterna : MonoBehaviour {
         else
         {
             overheat-=0.5f;
+            heat.value = overheat;
             if (overheat <= 0) overheat = 0;
         }
 
