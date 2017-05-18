@@ -15,6 +15,11 @@ public class Dash : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
+        if (emily==null)
+        {
+            Destroy(gameObject);
+        } 
+
         if(active==false)
         {
             transform.position = emily.transform.position;

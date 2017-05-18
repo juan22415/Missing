@@ -15,7 +15,7 @@ public class EmilyMovement : MonoBehaviour
     private Vector3 dashdirection;
     private bool ismoving = false;
     private AudioSource m_audiosource;
-
+    private bool ispaused;
     private float volumen;
     private float volLowRange = 0.1f;
     private float volHighRange = 0.3f;
@@ -67,6 +67,25 @@ public class EmilyMovement : MonoBehaviour
             m_audiosource.clip = dashsound;
             m_audiosource.volume = .5f;
             m_audiosource.Play();
+
+        }
+
+        if (Input.GetButtonDown("Start"))
+        {
+
+            if (!ispaused)
+            {
+                Time.timeScale = 0;
+                ispaused = true;
+            }
+               
+
+            else
+            {
+                Time.timeScale = 1;
+                ispaused = false;
+            }
+                
 
         }
 

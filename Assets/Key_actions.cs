@@ -7,7 +7,13 @@ public class Key_actions : MonoBehaviour {
     public GameObject opener;
 
 
-
+    private void Update()
+    {
+        if (Input.GetButtonDown("Y"))
+        {
+            opener.SetActive(true);
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {

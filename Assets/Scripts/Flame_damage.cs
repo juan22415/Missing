@@ -7,6 +7,7 @@ public class Flame_damage : MonoBehaviour {
 
     GameObject player;
     PlayerHealth playerHealth;
+    public int damage;
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -17,6 +18,6 @@ public class Flame_damage : MonoBehaviour {
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
-        playerHealth.TakeDamage(10);
+        playerHealth.TakeDamage(damage);
     }
 }

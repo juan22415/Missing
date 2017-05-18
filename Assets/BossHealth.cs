@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BossHealth : MonoBehaviour
@@ -27,6 +28,9 @@ public class BossHealth : MonoBehaviour
     bool isSinking;
     bool cantakedamage;
     int phasechangehealth = 400;
+    Bossattack bossattack;
+    float timer;
+
 
     public bool[] valve;
 
@@ -37,7 +41,7 @@ public class BossHealth : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         enemyAudio = GetComponent<AudioSource>();
-
+        bossattack = GetComponent<Bossattack>();
         boxcollider = GetComponent<BoxCollider>();
 
         currentHealth = startingHealth;
@@ -79,9 +83,20 @@ public class BossHealth : MonoBehaviour
             cantakedamage = true;
         }
 
+        timer += Time.deltaTime;
+
         if (cantakedamage)
         {
             anim.SetBool("cantakedamage", true);
+            
+            if (timer>5)
+
+            {
+                bossattack.enabled = true;
+                timer = 0;
+            }
+
+            
         }
     }
 
@@ -144,6 +159,8 @@ public class BossHealth : MonoBehaviour
         Destroy(gameObject, 2f);
     }
 
+   
+
     public void playdamagesound()
     {
         if (!enemyAudio.isPlaying)
@@ -193,6 +210,11 @@ public class BossHealth : MonoBehaviour
                 enemyAudio.Stop();
 
         }
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.LoadScene(1);
     }
 }
 

@@ -81,7 +81,8 @@ public class PlayerHealth : MonoBehaviour
         {
             // ... it should die.
             Death();
-            RestartLevel();
+            
+            //RestartLevel();
         }
     }
 
@@ -91,20 +92,24 @@ public class PlayerHealth : MonoBehaviour
         // Set the death flag so this function won't be called again.
         isDead = true;
 
+        anim.SetTrigger("isdead");
+
         // Turn off any remaining shooting effects.
-      
+
 
         // Tell the animator that the player is dead.
-      //  anim.SetTrigger("Die");
+        //  anim.SetTrigger("Die");
 
         // Set the audiosource to play the death clip and play it (this will stop the hurt sound from playing).
-        playerAudio.clip = deathClip;
-        playerAudio.Play();
+
+        //playerAudio.clip = deathClip;
+        //playerAudio.Play();
 
         // Turn off the movement and shooting scripts.
+
         emilymovement.enabled = false;
         emilyRotation.enabled = false;
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, 3f);
         Destroy(linterna,1f);
     }
 
@@ -117,11 +122,23 @@ public class PlayerHealth : MonoBehaviour
 
             Destroy(other.gameObject);
         }
+
+
+        else if (other.CompareTag("dientes"))
+        {
+            TakeDamage(30);
+        }
     }
 
     public void RestartLevel()
     {
         // Reload the level that is currently loaded.
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
+    }
+
+
+    private void OnDestroy()
+    {
+        RestartLevel();
     }
 }
